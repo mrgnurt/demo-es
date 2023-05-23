@@ -11,7 +11,7 @@ RUN ./mvnw package
 # Create a new image
 FROM openjdk:11-jre-slim
 WORKDIR /app
-COPY --from=build /app/target/demo.jar .
+COPY --from=build /app/target/demo-es.jar .
 
 # Start application
-CMD ["java", "-jar", "demo.jar"]
+CMD ["java", "-jar", "demo-es.jar"]

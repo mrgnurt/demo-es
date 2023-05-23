@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.example</groupId>
-	<artifactId>demo-circuit</artifactId>
+	<artifactId>demo-es</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>demo-circuit</name>
-	<description>demo-circuit</description>
+	<name>demo-es</name>
+	<description>demo-es</description>
 	<properties>
 		<java.version>11</java.version>
 	</properties>
@@ -55,6 +55,7 @@
 	</dependencies>
 
 	<build>
+		<finalName>demo-es</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
