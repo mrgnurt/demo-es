@@ -34,8 +34,10 @@ public class TransactionOperationImpl implements TransactionPort {
                 .build();
 
         SearchHits<Transaction> searchHits = elasticsearchOperations.search(searchQuery, Transaction.class);
-        return searchHits.getSearchHits().stream().map(SearchHit::getContent)
-                .collect(Collectors.toList()).get(0);
+        var results = searchHits.getSearchHits().stream().map(SearchHit::getContent)
+                .collect(Collectors.toList());
+
+        return results.isEmpty() ? null : results.get(0);
     }
 
     @Override
