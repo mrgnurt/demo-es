@@ -3,10 +3,16 @@ package com.example.demoes.infrastruture;
 import com.example.demoes.model.Transaction;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.elasticsearch.annotations.Query;
 import org.springframework.data.elasticsearch.repository.ElasticsearchRepository;
 
-public interface TransactionRepository extends ElasticsearchRepository<Transaction, String> {
-    Page<Transaction> findTransactionByPartnerId(String partnerId, Pageable pageable);
+import java.util.List;
 
-    Transaction findTransactionByIdAndPartnerId(String id, String partnerId);
+public interface TransactionRepository extends ElasticsearchRepository<Transaction, String> {
+    Page<Transaction> findTransactionsByPartnerId(String partnerId, Pageable pageable);
+
+    List<Transaction> findTransactionsByIdAndPartnerId(String id, String partnerId, Pageable pageable);
+
+    @Query("{\"bool\":{\"must\":[{\"term\":{\"partnerId\":\"?0\"}}]}}")
+    List<Transaction> findTransactionsPartnerIdCustomQuery(String partnerId, Pageable pageable);
 }

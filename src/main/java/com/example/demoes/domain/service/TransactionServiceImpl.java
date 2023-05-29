@@ -1,14 +1,16 @@
-package com.example.demoes.service;
+package com.example.demoes.domain.service;
 
 import com.example.demoes.model.Transaction;
-import com.example.demoes.port.TransactionPort;
+import com.example.demoes.domain.repository.TransactionPort;
+import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-@Service
-public class TransactionService {
+import java.util.List;
 
+@Service
+public class TransactionServiceImpl implements TransactionService {
     @Autowired
     @Qualifier("operation")
     private TransactionPort transactionPortOperation;
@@ -18,6 +20,7 @@ public class TransactionService {
     private TransactionPort transactionPortRepo;
 
     public String indexByEsRepo(Transaction transaction) {
+        System.out.println(new Gson().toJson(transaction));
         transactionPortRepo.indexTransaction(transaction);
         return "success";
     }
@@ -27,12 +30,11 @@ public class TransactionService {
         return "success";
     }
 
-    public Transaction queryByESRepo(String id) {
-        return transactionPortRepo.getTransaction(id);
+    public List<Transaction> queryByESRepo(String id, String partnerId) {
+        return transactionPortRepo.getTransactions(id, partnerId);
     }
 
-    public Transaction queryByESOperation(String id) {
-        return transactionPortOperation.getTransaction(id);
+    public List<Transaction> queryByESOperation(String id, String partnerId) {
+        return transactionPortOperation.getTransactions(id, partnerId);
     }
-
 }

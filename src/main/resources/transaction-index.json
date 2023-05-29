@@ -1,0 +1,28 @@
+{
+  "properties" : {
+    "amount" : {
+      "type" : "long"
+    },
+    "date" : {
+      "type" : "date"
+    },
+    "id" : {
+      "type" : "text",
+      "fields" : {
+        "keyword" : {
+          "type" : "keyword",
+          "ignore_above" : 256
+        }
+      }
+    },
+    "info" : {
+      "type" : "text"
+    },
+    "partnerId" : {
+      "type" : "keyword"
+    },
+    "customerId": {
+      "type" : "keyword"
+    }
+  }
+}
